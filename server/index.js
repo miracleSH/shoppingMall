@@ -45,8 +45,6 @@ app.post("/api/users/login", (req, res) => {
   //요청된 이메일을 디비에 있는지 확인
   console.log(req.body);
   User.findOne({ email: req.body.email }, (err, user) => {
-    console.log(err);
-    console.log(user);
     if (!user) {
       return res.json({
         loginSuccess: false,

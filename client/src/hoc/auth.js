@@ -14,7 +14,6 @@ export default function (SpecificComponent, option, adminRoute = null) {
     const navigate = useNavigate();
     useEffect(() => {
       dispatch(auth()).then((_res) => {
-        console.log(_res);
         //로그인 되어 있지 않은 상태
         if (!_res.payload.isAuth) {
           if (option) {
@@ -31,7 +30,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
           }
         }
       });
-    }, []);
+    }, [dispatch]);
     return <SpecificComponent />;
   };
   return AuthenticationCheck;
