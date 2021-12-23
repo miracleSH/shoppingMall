@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useStore } from "react-redux";
 import { Link } from "react-router-dom";
 import { auth } from "../../../_actions/user_action";
 
@@ -19,16 +19,15 @@ function Navbar(props) {
    * 로그인 시 유저 이름을 나타나게 하는 부분
    * ! 로그인을 하면 redux를 통해 상태가 변하게 되고 이를 감지해 navbar.js도 랜더링이 된다.
    */
-  useEffect(() => {
-    dispatch(auth()).then((_res) => {
-      if (_res.payload.isAuth) {
-        setIsLogIn(true);
-        setUserName(_res.payload.name);
-      } else {
-        setIsLogIn(false);
-      }
-    });
-  }, [dispatch]);
+
+  dispatch(auth()).then((_res) => {
+    if (_res.payload.isAuth) {
+      setIsLogIn(true);
+      setUserName(_res.payload.name);
+    } else {
+      setIsLogIn(false);
+    }
+  });
 
   /**
    * 로그아웃 클릭 메소드
@@ -36,8 +35,8 @@ function Navbar(props) {
   const onClickHandler = () => {
     axios.get("/api/users/logout").then((_res) => {
       if (_res.data.success) {
-        navigate("/login");
         setUserName("");
+        navigate("/login");
       } else alert("로그아웃 실패");
     });
   };
