@@ -61,6 +61,11 @@ function Navbar(props) {
               <span className="font-bold text-white">상품등록</span>
             </Link>
           </li>
+          <li>
+            <Link className="items-center mr-10 float-right" to={"/register"}>
+              <span className="font-bold text-white">회원가입</span>
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

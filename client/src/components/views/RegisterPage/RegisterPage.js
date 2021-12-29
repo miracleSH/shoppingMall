@@ -50,23 +50,25 @@ function RegisterPage() {
     setSamePassword(event.currentTarget.value);
   };
   return (
-    <div className="flex">
-      <h1>회원가입</h1>
-      <form onSubmit={onSubmitHandler} className="flex flex-col">
-        <label>이름</label>
-        <input className="border-2" type="text" value={name} onChange={onNameHandler} />
-        <label>이메일</label>
-        <input className="border-2" type="email" value={email} onChange={onEmailHandler} />
-        <label>비밀번호</label>
-        <input className="border-2" type="password" value={password} onChange={onPasswordHandler} />
-        <label>비밀번호 확인</label>
-        <input className="border-2" type="password" value={samePassword} onChange={onSamePasswordHandler} />
-        <p>{errorMessage}</p>
-        <br />
-        <button className="border-2" type="submit" onSubmit={onSubmitHandler}>
-          회원가입
-        </button>
-      </form>
+    <div className="relative my-10 container mx-auto">
+      <div className="w-6/12 mx-auto">
+        <h1>회원가입</h1>
+        <form onSubmit={onSubmitHandler} className="flex flex-col">
+          <label>이름</label>
+          <input className="border-2" type="text" value={name} onChange={onNameHandler} />
+          <label>이메일</label>
+          <input className="border-2" type="email" value={email} onChange={onEmailHandler} />
+          <label>비밀번호</label>
+          <input className="border-2" type="password" value={password} onChange={onPasswordHandler} />
+          <label>비밀번호 확인</label>
+          <input className="border-2" type="password" value={samePassword} onChange={onSamePasswordHandler} />
+          <p>{errorMessage}</p>
+          <br />
+          <button className="border-2" type="submit" onSubmit={onSubmitHandler}>
+            회원가입
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

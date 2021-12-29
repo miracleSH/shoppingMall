@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import FileUpload from "../../utils/FileUpload";
 const UploadProductPage = () => {
   /**
    * * state 부분
@@ -6,6 +7,7 @@ const UploadProductPage = () => {
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
+  const [images, setImages] = useState([]);
 
   const countriesList = ["Korea", "Japan", "China", "America", "Russia", "Europe", "etc"];
   const [country, setCountry] = useState("Korea");
@@ -23,6 +25,9 @@ const UploadProductPage = () => {
     initCountry: (event) => {
       setCountry(event.target.value);
     },
+    initImages: (event) => {
+      setImages();
+    },
   };
 
   const onSubmitHandler = (e) => {
@@ -32,7 +37,9 @@ const UploadProductPage = () => {
   return (
     <div className="relative my-10 container mx-auto">
       <div className="w-6/12 mx-auto">
+        <h1>여행 상품 업로드</h1>
         <form className="flex flex-col">
+          <FileUpload />
           <label className="">이름</label>
           <input
             className="border border-2"
