@@ -7,7 +7,7 @@ function FileUpload() {
 
   const dropHandler = (acceptImages) => {
     let formData = new FormData();
-    // ! 파일을 백엔트로 보낼 때 config 설정을 해줘야 에러가 발생하지 않음
+    // ! 파일을 백엔드로 보낼 때 config 설정을 해줘야 에러가 발생하지 않음
     const config = {
       header: { "content-type": "multipart/form-data" },
     };
@@ -21,25 +21,30 @@ function FileUpload() {
       }
     });
   };
+
+  const onDeleteImage = (imageIndex) => {
+    let duplicatedImages = [...images];
+    duplicatedImages.splice(imageIndex, 1);
+    setImages(duplicatedImages);
+  };
   return (
-    <div>
+    <div className="container flex flex-row">
       <Dropzone onDrop={dropHandler}>
         {({ getRootProps, getInputProps }) => (
-          <section>
-            <div className="w-44 h-40 border border-2" {...getRootProps()}>
+          <section className="mr-10">
+            <div className="w-64 h-64 border border-2" {...getRootProps()}>
               <input {...getInputProps()} />
-              <div className="mt-12 text-5xl font-semibold text-center">+</div>
+              <div className="mt-24 text-5xl font-semibold text-center">+</div>
             </div>
           </section>
         )}
       </Dropzone>
 
-      <div className="flex">
+      <div className="flex flex-col w-64 h-64 overflow-x-scroll">
         {images.map((image, index) => {
-          console.log(image);
           return (
-            <div key={index}>
-              <img alt="product" src={`http://localhost:5000/${image}`} />
+            <div onClick={() => onDeleteImage(index)} key={index}>
+              <img className="min-w-full w-64 h-64" alt="product" src={`http://localhost:5000/${image}`} />
             </div>
           );
         })}
