@@ -45,25 +45,25 @@ function Navbar(props) {
    * 랜더링되는 부분
    */
   return (
-    <div className="absolute h-10 inset-x-0 top-0 bg-black">
-      <div className="container mx-auto">
-        <ul className="mt-2">
-          <li>
+    <div className="h-10  inset-x-0 top-0 bg-black">
+      <div className="container content-center mx-auto">
+        <ul className="">
+          <li className="content-center">
             <button className="items-center float-right font-bold text-white" onClick={onClickHandler}>
               로그아웃
             </button>
           </li>
-          <li className="items-center mr-10 float-right font-bold text-white">
-            {isLogin ? <span>{userName}</span> : <Link to={"/login"}>로그인</Link>}
+          <li className="items-center content-center mr-10 float-right font-bold text-white">
+            {isLogin ? <div>{userName}</div> : <Link to={"/login"}>로그인</Link>}
           </li>
           <li>
             <Link className="items-center mr-10 float-right" to={"/product/upload"}>
-              <span className="font-bold text-white">상품등록</span>
+              <div className="font-bold text-white">상품등록</div>
             </Link>
           </li>
           <li>
             <Link className="items-center mr-10 float-right" to={"/register"}>
-              <span className="font-bold text-white">회원가입</span>
+              <div className="font-bold text-white">회원가입</div>
             </Link>
           </li>
         </ul>

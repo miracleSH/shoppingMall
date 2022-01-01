@@ -31,7 +31,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
           }
         }
       });
-    }, [dispatch]);
+    }, [dispatch, navigate]);
     return <SpecificComponent {...props} user={user} />;
   };
   return AuthenticationCheck;
