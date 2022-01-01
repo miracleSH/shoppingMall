@@ -30,6 +30,7 @@ app.use(cookieParser());
 app.use("/api/users", require("./routes/users"));
 app.use("/api/product", require("./routes/product"));
 
+//정적 경로를 지정하는 부분
 app.use("/uploads", express.static("uploads"));
 
 app.listen(port, () => console.log(`Example app listening on port ${port}`));

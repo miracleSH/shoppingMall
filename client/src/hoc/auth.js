@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../_actions/user_action";
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +12,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
   const AuthenticationCheck = (props) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const user = useSelector((state) => state.user);
     useEffect(() => {
       dispatch(auth()).then((_res) => {
         //로그인 되어 있지 않은 상태
@@ -31,7 +32,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
         }
       });
     }, [dispatch]);
-    return <SpecificComponent />;
+    return <SpecificComponent {...props} user={user} />;
   };
   return AuthenticationCheck;
 }

@@ -19,7 +19,6 @@ router.post("/register", (req, res) => {
 //로그인 기능
 router.post("/login", (req, res) => {
   //요청된 이메일을 디비에 있는지 확인
-  console.log(req.body);
   User.findOne({ email: req.body.email }, (err, user) => {
     if (!user) {
       return res.json({

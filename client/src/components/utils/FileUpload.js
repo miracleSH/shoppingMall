@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Dropzone from "react-dropzone";
 import axios from "axios";
 
-function FileUpload() {
+function FileUpload(props) {
   const [images, setImages] = useState([]);
 
   const dropHandler = (acceptImages) => {
@@ -11,11 +11,14 @@ function FileUpload() {
     const config = {
       header: { "content-type": "multipart/form-data" },
     };
+    console.log(acceptImages[0]);
     formData.append("file", acceptImages[0]);
     axios.post("/api/product/images", formData, config).then((_res) => {
-      //console.log(_res);
       if (_res.data.success) {
-        setImages([...images, _res.data.filePath]);
+        let fileName = _res.data.filePath.split("\\")[1];
+        setImages([...images, fileName]);
+        //부모 컴포넌트에서 속성으로 함수를 전달. 자식 컴포넌트에서 함수를 받아서 실행하면 부모 컴포넌트의 함수가 실행됨.
+        props.refreshFunction([...images, fileName]);
       } else {
         alert("업로드 실패");
       }
@@ -26,9 +29,11 @@ function FileUpload() {
     let duplicatedImages = [...images];
     duplicatedImages.splice(imageIndex, 1);
     setImages(duplicatedImages);
+    //부모 컴포넌트에서 속성으로 함수를 전달. 자식 컴포넌트에서 함수를 받아서 실행하면 부모 컴포넌트의 함수가 실행됨.
+    props.refreshFunction(duplicatedImages);
   };
   return (
-    <div className="container flex flex-row">
+    <div className="container mx-auto flex flex-row">
       <Dropzone onDrop={dropHandler}>
         {({ getRootProps, getInputProps }) => (
           <section className="mr-10">
@@ -44,7 +49,7 @@ function FileUpload() {
         {images.map((image, index) => {
           return (
             <div onClick={() => onDeleteImage(index)} key={index}>
-              <img className="min-w-full w-64 h-64" alt="product" src={`http://localhost:5000/${image}`} />
+              <img className="min-w-full w-64 h-64" alt="product" src={`http://localhost:5000/uploads/${image}`} />
             </div>
           );
         })}
