@@ -4,6 +4,9 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.4.1",
+    "@heroicons/react": "^1.0.5",
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/forms": "^0.4.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -23,7 +26,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build",
+    "build": "postcss src/index.css -o public/build/tailwind.css",
     "test": "craco test",
     "eject": "react-scripts eject"
   },
@@ -47,7 +50,8 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.8.8",
-    "postcss": "^7.0.39",
+    "postcss": "^8.4.5",
+    "postcss-cli": "^9.1.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
   }
 }
