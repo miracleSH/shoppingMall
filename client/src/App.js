@@ -20,7 +20,7 @@ function App() {
   const RegisterComponent = Auth(RegisterPage, false);
   const UploadProductComponent = Auth(UploadProductPage, true);
   return (
-    <div className="h-screen">
+    <div>
       <Provider store={createStoreWithMiddleware(Reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())}>
         <BrowserRouter>
           <Navbar />

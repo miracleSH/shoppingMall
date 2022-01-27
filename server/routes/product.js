@@ -9,7 +9,7 @@ let storage = multer.diskStorage({
     cb(null, "uploads");
   },
   filename: function (req, file, cb) {
-    cb(null, `${Date.now()}_${file.originalname}`);
+    cb(null, `${Date.now().toLocaleString()}_${file.originalname}`);
   },
 });
 
@@ -38,12 +38,17 @@ router.post("/", (req, res) => {
 });
 
 // * 디비에서 상품 리스트 가져오기
-router.get("/", (req, res) => {
+router.post("/products", (req, res) => {
+  let limit = req.body.limit ? parseInt(req.body.limit) : 50;
+  let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+
   Product.find()
     .populate("writer")
+    .limit(limit)
+    .skip(skip)
     .exec((err, productList) => {
       if (err) return res.status(400).json({ success: false });
-      return res.status(200).json({ success: true, productList: productList });
+      return res.status(200).json({ success: true, productList: productList, postSize: productList.length });
     });
 
   //res.json({ productList: products });

@@ -6,38 +6,41 @@ const saltRounds = 10;
 
 const jwt = require("jsonwebtoken");
 const { json } = require("express");
-const userSchema = mongoose.Schema({
-  name: {
-    type: String,
-    maxlength: 50,
+const userSchema = mongoose.Schema(
+  {
+    name: {
+      type: String,
+      maxlength: 50,
+    },
+    email: {
+      type: String,
+      trim: true,
+      unique: 1,
+    },
+    password: {
+      type: String,
+      minglength: 5,
+    },
+    lastname: {
+      type: String,
+      maxlength: 50,
+    },
+    role: {
+      type: Number,
+      default: 0,
+    },
+    token: {
+      type: String,
+    },
+    tokenExp: {
+      type: Number,
+    },
+    image: {
+      type: String,
+    },
   },
-  email: {
-    type: String,
-    trim: true,
-    unique: 1,
-  },
-  password: {
-    type: String,
-    minglength: 5,
-  },
-  lastname: {
-    type: String,
-    maxlength: 50,
-  },
-  role: {
-    type: Number,
-    default: 0,
-  },
-  token: {
-    type: String,
-  },
-  tokenExp: {
-    type: Number,
-  },
-  image: {
-    type: String,
-  },
-});
+  { timestamps: true }
+);
 
 //비밀번호가 수정될 때 암호화
 userSchema.pre("save", function (next) {
